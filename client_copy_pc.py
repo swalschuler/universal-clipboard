@@ -1,13 +1,13 @@
 #! python3
 # Client for universal clipboard
-# 
-# #>>> r = requests.get("http://antman99781.pythonanywhere.com/clipboard")
-#>>> r.text
-#'bob\n'
-#>>>
 
 import requests
 import pyperclip
+from win10toast import ToastNotifier
 
-payload = {'value': pyperclip.paste()}
+text = pyperclip.paste()
+payload = {'value': text}
 r = requests.post("http://antman99781.pythonanywhere.com/clipboard", data=payload)
+
+toaster = ToastNotifier()
+toaster.show_toast("Universal Clipboard", "Placed the value: " + text)
